@@ -11,27 +11,46 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="loader.js"></script>
+	<script type="text/javascript" src="piechart.js"></script>
+	<script type="text/javascript" src="preview.js"></script>
 	<script type="text/javascript">
-	$(function () {
-		$(this.id).click(function() {
-		$('#upload').click();
-	});
-	});
-	$(function () {
-		$(":file").change(function () {
+	$('[data-toggle="tooltip"]').tooltip({'placement': 'bottom'});
+	function preview(element) {
+		$(element).change(function () {
 			if (this.files && this.files[0]) {
 				var reader = new FileReader();
 				reader.onload = imageIsLoaded;
 				reader.readAsDataURL(this.files[0]);
 			}
 		});
-	});
+	};
 
 	function imageIsLoaded(e) {
-		$('#myImg').attr('src', e.target.result);
-		$('#myImg').css("display", "block");
+		$("#myImg").attr('src', e.target.result);
+	};
+	function path(item) {
+		document.getElementById(item.id+"Path").value = document.getElementById(item.id).value.substring(12);		
 	};
 	</script>
+	<style type="text/css">
+	.fileUpload {
+		position: relative;
+		overflow: hidden;
+		margin: 10px;
+	}
+	.fileUpload input.upload {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 0;
+		padding: 0;
+		font-size: 20px;
+		cursor: pointer;
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -42,8 +61,8 @@
 				<h2><input class="form-control" id="name" type="text" placeholder="Enter name"></h2>
 			</div>
 			<div class="col-sm-3">
-				<input type="image" id="myImg" src="upload.png" class="img-rounded" alt="upload" width="100" height="100">
-				<input id='upload' type='file' style ="display:none;"/>
+				<input type="image" id="myImg" src="upload.png" class="img-rounded" alt="upload" width="100" height="100" onclick = "$('#uploadImg').click()">
+				<input id='uploadImg' type='file' style ="display:none;" onchange="preview(this)" accept="image/*"/>
 			</div>
 		</div>
 		<br>
@@ -85,89 +104,70 @@
 		<div id ='section-3' class='row'>
 			<div class='col-sm-2'><label for="inputPassword">CANDIDATE SCORE</label></div>
 			<div class="form-group col-sm-1">
-				<input class="form-control text-center" id="disabledInput" type="text" disabled value="%">
+				<input class="form-control text-center" id="percentage" type="text" disabled value="%">
 			</div>
 			<div class="form-group col-sm-2">
-				<input class="form-control text-center" id="disabledInput" type="text" disabled value=" /10" text-a>
+				<input class="form-control text-center" id="score" type="text" disabled value=" /10" text-a>
 			</div>
 			<div class="col-sm-10">
-				<div class="progress progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="2" style="width:100%">
-					0 LOCATION
+				<div id="piechart" style="width: 630px; height: 350px;">
 				</div>
 			</div>
-			<div class="form-group col-sm-2">
-				<select class="form-control" id="sel1">
-					<option>score</option>
-					<option>0</option>
-					<option>0.5</option>
-					<option>1</option>
-					<option>1.5</option>
-					<option>2</option>
-				</select>
-			</div>
-			<div class="col-sm-10">
-				<div class="progress progress-bar" role="progressbar" aria-valuenow="0.5" aria-valuemin="0" aria-valuemax="2" style="width:25%">
-					0.5 SALARY
+			<div class="col-sm-2">
+				<br><br><br>
+				<div class="form-group">
+					<select name="location" class="form-control" id="LOCATION">
+						<option value=0> location score</option>
+						<option data-toggle="tooltip" title="Hooray!">0</option>
+						<option data-toggle="tooltip" title="Hooray!">0.5</option>
+						<option data-toggle="tooltip" title="Hooray!">1</option>
+						<option data-toggle="tooltip" title="Hooray!">1.5</option>
+						<option data-toggle="tooltip" title="Hooray!">2</option>
+					</select>
 				</div>
-			</div>
-			<div class="form-group col-sm-2">
-				<select class="form-control" id="sel1">
-					<option>score</option>
-					<option>0</option>
-					<option>0.5</option>
-					<option>1</option>
-					<option>1.5</option>
-					<option>2</option>
-				</select>
-			</div>
-			<div class="col-sm-10">
-				<div class="progress progress-bar progress-bar-info" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="2" style="width:50%">
-					1 TECHNICAL EXPERIENNCE
+				<div class="form-group">
+					<select class="form-control" id="SALARY">
+						<option value=0>salary score</option>
+						<option data-toggle="tooltip" title="Hooray!">0</option>
+						<option data-toggle="tooltip" title="Hooray!">0.5</option>
+						<option data-toggle="tooltip" title="Hooray!">1</option>
+						<option data-toggle="tooltip" title="Hooray!">1.5</option>
+						<option data-toggle="tooltip" title="Hooray!">2</option>
+					</select>
 				</div>
-			</div>
-			<div class="form-group col-sm-2">
-				
-				<select class="form-control" id="sel1">
-					<option>score</option>
-					<option>0</option>
-					<option>0.5</option>
-					<option>1</option>
-					<option>1.5</option>
-					<option>2</option>
-				</select>
-			</div>
-			<div class="col-sm-10">
-				<div class="progress progress-bar progress-bar-warning" role="progressbar" aria-valuenow="1.5" aria-valuemin="0" aria-valuemax="2" style="width:75%">
-					1.5 PROJECT EXPERIENCE
+				<div class="form-group">
+					<select class="form-control" id="TEC-EXP">
+						<option value=0>tech-exp score</option>
+						<option data-toggle="tooltip" title="Hooray!">0</option>
+						<option data-toggle="tooltip" title="Hooray!">0.5</option>
+						<option data-toggle="tooltip" title="Hooray!">1</option>
+						<option data-toggle="tooltip" title="Hooray!">1.5</option>
+						<option data-toggle="tooltip" title="Hooray!">2</option>
+					</select>
 				</div>
-			</div>
-			<div class="form-group col-sm-2">
-				<select class="form-control" id="sel1">
-					<option>score</option>
-					<option>0</option>
-					<option>0.5</option>
-					<option>1</option>
-					<option>1.5</option>
-					<option>2</option>
-				</select>
-			</div>
-			<div class="col-sm-10">
-				<div class="progress progress-bar progress-bar-success" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="2" style="width:100%">
-					2 STABLE WORK-HISTORY
+				<div class="form-group">
+					<select class="form-control" id="PJT-EXP">
+						<option  value=0>project-exp score</option>
+						<option data-toggle="tooltip" title="Hooray!">0</option>
+						<option data-toggle="tooltip" title="Hooray!">0.5</option>
+						<option data-toggle="tooltip" title="Hooray!">1</option>
+						<option data-toggle="tooltip" title="Hooray!">1.5</option>
+						<option data-toggle="tooltip" title="Hooray!">2</option>
+					</select>
 				</div>
-			</div>
-			<div class="form-group col-sm-2">
-				<select class="form-control" id="sel1">
-					<option>score</option>
-					<option>0</option>
-					<option>0.5</option>
-					<option>1</option>
-					<option>1.5</option>
-					<option>2</option>
-				</select>
+				<div class="form-group">
+					<select class="form-control" id="WORK">
+						<option  value=0>work-history score</option>
+						<option data-toggle="tooltip" title="Hooray!">0</option>
+						<option data-toggle="tooltip" title="Hooray!">0.5</option>
+						<option data-toggle="tooltip" title="Hooray!">1</option>
+						<option data-toggle="tooltip" title="Hooray!">1.5</option>
+						<option data-toggle="tooltip" title="Hooray!">2</option>
+					</select>
+				</div>
 			</div>
 			<div class='col-sm-1 col-sm-offset-4'>
-				<button type="button" class="btn btn-success">submitScores</button>
+				<button type="button" class="btn btn-success" onclick='drawChart()'>submitScores</button>
 			</div>
 		</div>
 		<br>
@@ -177,38 +177,38 @@
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="pos1">
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="pos2">
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="pos3">
 					</div>
 				</div>
 				<label for="usr">Concerns:</label>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="conc1">
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="conc2">
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="usr">
+						<input type="text" class="form-control" id="conc3">
 					</div>
 				</div>
 			</div>
@@ -216,11 +216,33 @@
 				<label for="comment">Candidate Description:</label>
 				<textarea class="form-control" rows="11" id="comment"></textarea>
 			</div>
-			<div class="form-group col-sm-4">
-				<input type="image" id="myImg" src="resume.png" class="img-rounded" alt="upload" width="70" height="70">
-				<input id='upload' type='file' style ="display:none;"/>
+			<div class="col-sm-2">
+				<br>
+				<input type="text" class="form-control" id="resumePath" placeholder="Choose File" disabled="disabled">
+			</div>
+			<div class="col-sm-2">
+				<br>
+				<button type="button" class="btn btn-success" onclick='$("#resume").click()'>Resume</button>
+				<input id="resume" type="file" style="display:none;" onchange ="path(this)" />
+			</div>
+			<div class="col-sm-2">
+				<br>
+				<input type="text" class="form-control" id="videoPath" placeholder="Choose File" disabled="disabled">
+			</div>
+			<div class="col-sm-2">
+				<br>
+				<button type="button" class="btn btn-danger" onclick='$("#video").click()'>Video</button>
+				<input id="video" type="file" style="display:none;" onchange ="path(this)" accept="video/*" />
+			</div>
+			<div class="col-sm-2">
+				<br>
+				<input type="text" class="form-control" id="linkedinPath" placeholder="Enter url" >
+			</div>
+			<div class="col-sm-2">
+				<br>
+				<button type="button" class="btn btn-info" onclick='$("#linkedin").click()'>Linkedin</button>
+				<input id="linkedin" type="url" style="display:none;" />
 			</div>
 		</div>
-	</div>
-</body>
-</html>
+	</body>
+	</html>
