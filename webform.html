@@ -2,20 +2,38 @@
 <html lang="en">
 <head>
 	<title>CandidateForm</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	
 	<script type="text/javascript" src="loader.js"></script>
 	<script type="text/javascript" src="piechart.js"></script>
 	<script type="text/javascript" src="preview.js"></script>
 	<script type="text/javascript">
-	$('[data-toggle="tooltip"]').tooltip({'placement': 'bottom'});
+	$(document).ready(function() {
+
+		$("#LOCATION").on('mouseleave', function(e) {
+			$('#LOCATION').popover('destroy');
+		});
+
+		$("#LOCATION").on('mouseover', function(e) {
+			var $e = $(e.target); 
+			if ($e.is('option')) {
+				$('#LOCATION').popover('destroy');
+				$("#LOCATION").popover({
+					trigger: 'manual',
+					placement: 'right',
+					title: $e.attr("data-title")
+				}).popover('show');
+			}
+		});
+	});
 	function preview(element) {
 		$(element).change(function () {
 			if (this.files && this.files[0]) {
@@ -32,23 +50,28 @@
 	function path(item) {
 		document.getElementById(item.id+"Path").value = document.getElementById(item.id).value.substring(12);		
 	};
+	function assignValue(item){
+		var val = item.value;
+		if (item.id.startsWith("pos")||item.id.startsWith("conc")||item.id.startsWith("comment")) {
+			$(item).parent().children(':first-child').html(val);
+		}else{
+		var text = item.id.toUpperCase()+": "+val;
+		$(item).parent().children(':first-child').html(text);
+	}
+	};
+	function assignValueOuterParent(item){
+		var val = item.value;
+		if (item.id.startsWith("pos")||item.id.startsWith("conc")||item.id.startsWith("comment")) {
+			$(item).parent().children(':first-child').html(val);
+		}else{
+		var text = item.id.toUpperCase()+": "+val;
+		$(item).parent().parent().children(':first-child').html(text);
+	}
+	};
 	</script>
 	<style type="text/css">
-	.fileUpload {
-		position: relative;
-		overflow: hidden;
-		margin: 10px;
-	}
-	.fileUpload input.upload {
-		position: absolute;
-		top: 0;
-		right: 0;
-		margin: 0;
-		padding: 0;
-		font-size: 20px;
-		cursor: pointer;
-		opacity: 0;
-		filter: alpha(opacity=0);
+	[name='previewData']{
+		display: none;
 	}
 	</style>
 </head>
@@ -58,7 +81,9 @@
 			<div class="col-sm-1"><img src="Logo.png"  height="82" width="82"></div>
 			<div class="col-sm-4 text-center"><h3>CANDIDATE SCORECARD</h3></div>
 			<div class="col-sm-4">
-				<h2><input class="form-control" id="name" type="text" placeholder="Enter name"></h2>
+				<h3 name='previewData'></h3>
+				<br>
+				<input class="form-control" id="Name" type="text" placeholder="Enter name" onchange='assignValue(this)' name='formData'>
 			</div>
 			<div class="col-sm-3">
 				<input type="image" id="myImg" src="upload.png" class="img-rounded" alt="upload" width="100" height="100" onclick = "$('#uploadImg').click()">
@@ -68,34 +93,41 @@
 		<br>
 		<div id ="section-1" class='row'>
 			<div class="col-xs-3" id ="mobile">
-				<input class="form-control" id="ex2" type="text" placeholder="Enter mobile">
+				<h3 name='previewData'></h3>
+				<input class="form-control" id="Mobile" type="text" placeholder="Enter mobile" name='formData' onchange='assignValue(this)'>
 			</div>
 			<div class="col-xs-3" id ="email">
-				<input class="form-control" id="ex2" type="email" placeholder="Enter email">
+				<h3 name='previewData'></h3>
+				<input class="form-control" id="Email" type="email" placeholder="Enter email" name='formData' onchange='assignValue(this)'>
 			</div>
 			<div class="col-xs-3" id ="job">
-				<input class="form-control" id="ex2" type="text" placeholder="Enter job title">
+				<h3 name='previewData'></h3>
+				<input class="form-control" id="JobTitle" type="text" placeholder="Enter job title" name='formData' onchange='assignValue(this)'>
 			</div>
 			<div class="col-xs-3" id ="location">
-				<input class="form-control" id="ex2" type="text" placeholder="Enter location">
+				<h3 name='previewData'></h3>
+				<input class="form-control" id="Location" type="text" placeholder="Enter location" name='formData' onchange='assignValue(this)'>
 			</div>
 		</div>
 		<br><br>	
 		<div id='section-2' class='row'>
 			<form role="form">
 				<div class="col-sm-4 alert alert-success" id ="job">
-					<label class="checkbox-inline">
-						<input type="checkbox" value="">Schedule Interview
+					<!-- <p name='previewData'></p> -->
+					<label class="checkbox-inline" name=''>
+						<input id='Schedule_Interview' type="checkbox"  onchange='assignValueOuterParent(this)'>Schedule Interview
 					</label>
 				</div>
 				<div class="col-sm-4 alert alert-warning" id ="job">
-					<label class="checkbox-inline">
-						<input type="checkbox" value="">Present again in 30 days
+					<!-- <p name='previewData'></p> -->
+					<label class="checkbox-inline" name=''>
+						<input id='Present_again_in_30_days' type="checkbox"  onchange='assignValueOuterParent(this)'>Present again in 30 days
 					</label>
 				</div>
 				<div class="col-sm-4 alert alert-danger" id ="job">
-					<label class="checkbox-inline">
-						<input type="checkbox" value="">Not Interested
+					<!-- <p name='previewData'></p> -->
+					<label class="checkbox-inline" name=''>
+						<input id='Not_Interested' type="checkbox"  onchange='assignValueOuterParent(this)'>Not Interested
 					</label>
 				</div>
 			</form>
@@ -116,8 +148,9 @@
 			<div class="col-sm-2">
 				<br><br><br>
 				<div class="form-group">
-					<select name="location" class="form-control" id="LOCATION">
-						<option value=0> location score</option>
+					<h3 name='previewData'></h3>
+					<select class="form-control" id="Location_Score" name='formData' onchange='assignValue(this)'>
+						<option value='0'> location score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
 						<option data-toggle="tooltip" title="Hooray!">0.5</option>
 						<option data-toggle="tooltip" title="Hooray!">1</option>
@@ -126,7 +159,8 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<select class="form-control" id="SALARY">
+					<h3 name='previewData'></h3>
+					<select class="form-control" id="Salary_Score" name='formData' onchange='assignValue(this)'>
 						<option value=0>salary score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
 						<option data-toggle="tooltip" title="Hooray!">0.5</option>
@@ -136,7 +170,8 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<select class="form-control" id="TEC-EXP">
+					<h3 name='previewData'></h3>
+					<select class="form-control" id="TEC_Experience_Score" name='formData' onchange='assignValue(this)'>
 						<option value=0>tech-exp score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
 						<option data-toggle="tooltip" title="Hooray!">0.5</option>
@@ -146,7 +181,8 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<select class="form-control" id="PJT-EXP">
+					<h3 name='previewData'></h3>
+					<select class="form-control" id="PJT_Experience_Score" name='formData' onchange='assignValue(this)'>
 						<option  value=0>project-exp score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
 						<option data-toggle="tooltip" title="Hooray!">0.5</option>
@@ -156,8 +192,9 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<select class="form-control" id="WORK">
-						<option  value=0>work-history score</option>
+					<h3 name='previewData'></h3>
+					<select class="form-control" id="Work_History_Score" name='formData' onchange='assignValue(this)'>
+						<option  value=0>Work History score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
 						<option data-toggle="tooltip" title="Hooray!">0.5</option>
 						<option data-toggle="tooltip" title="Hooray!">1</option>
@@ -177,72 +214,89 @@
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="pos1">
+						<p name='previewData'></p>
+						<input type="text" class="form-control" id="pos1" name='formData' onchange='assignValue(this)'>
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="pos2">
+						<p name='previewData'></p>
+						<input type="text" class="form-control" id="pos2" name='formData' onchange='assignValue(this)'>
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="pos3">
+						<p name='previewData'></p>
+						<input type="text" class="form-control" id="pos3" name='formData' onchange='assignValue(this)'>
 					</div>
 				</div>
 				<label for="usr">Concerns:</label>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="conc1">
+						<p name='previewData'></p>
+						<input type="text" class="form-control" id="conc1" name='formData' onchange='assignValue(this)'>
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="conc2">
+						<p name='previewData'></p>
+						<input type="text" class="form-control" id="conc2" name='formData' onchange='assignValue(this)'>
 					</div>
 				</div>
 				<div class='row'>
 					<div class='col-sm-1 glyphicon glyphicon-hand-right'></div>
 					<div class='col-sm-10'>
-						<input type="text" class="form-control" id="conc3">
+						<p name='previewData'></p>
+						<input type="text" class="form-control" id="conc3" name='formData' onchange='assignValue(this)'>
 					</div>
 				</div>
 			</div>
 			<div class="form-group col-sm-4">
 				<label for="comment">Candidate Description:</label>
-				<textarea class="form-control" rows="11" id="comment"></textarea>
+				<p id="commentText" name='previewData'></p>
+				<textarea class="form-control" rows="11" id="comment" name='formData' onchange='$("#commentText").html(this.value)'></textarea>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-4">
 				<br>
-				<input type="text" class="form-control" id="resumePath" placeholder="Choose File" disabled="disabled">
-			</div>
-			<div class="col-sm-2">
-				<br>
-				<button type="button" class="btn btn-success" onclick='$("#resume").click()'>Resume</button>
-				<input id="resume" type="file" style="display:none;" onchange ="path(this)" />
-			</div>
-			<div class="col-sm-2">
-				<br>
-				<input type="text" class="form-control" id="videoPath" placeholder="Choose File" disabled="disabled">
-			</div>
-			<div class="col-sm-2">
-				<br>
-				<button type="button" class="btn btn-danger" onclick='$("#video").click()'>Video</button>
-				<input id="video" type="file" style="display:none;" onchange ="path(this)" accept="video/*" />
-			</div>
-			<div class="col-sm-2">
-				<br>
-				<input type="text" class="form-control" id="linkedinPath" placeholder="Enter url" >
-			</div>
-			<div class="col-sm-2">
-				<br>
-				<button type="button" class="btn btn-info" onclick='$("#linkedin").click()'>Linkedin</button>
-				<input id="linkedin" type="url" style="display:none;" />
+				<div class="col-sm-7">
+
+					<input type="text" class="form-control" id="resumePath" placeholder="Choose File" disabled="disabled">
+				</div>
+				<div class="col-sm-3">
+
+					<button type="button" class="btn btn-success" onclick='$("#resume").click()'>Resume</button>
+					<input id="resume" type="file" style="display:none;" onchange ="path(this)" />
+					<br><br>
+				</div>
+				<div class="col-sm-7">
+
+					<input type="text" class="form-control" id="videoPath" placeholder="Choose File" disabled="disabled">
+				</div>
+				<div class="col-sm-3">
+
+					<button type="button" class="btn btn-danger" onclick='$("#video").click()'>Video</button>
+					<input id="video" type="file" style="display:none;" onchange ="path(this)" accept="video/*" />
+					<br><br>
+				</div>
+				<div class="col-sm-7">
+
+					<input type="text" class="form-control" id="linkedinPath" placeholder="Enter url" >
+				</div>
+				<div class="col-sm-3">
+
+					<button type="button" class="btn btn-info" onclick='$("#linkedin").click()'>Linkedin</button>
+					<input id="linkedin" type="url" style="display:none;" />
+					<br>
+				</div>
 			</div>
 		</div>
-	</body>
-	</html>
+	</div>
+	<div style="text-align:center">
+			<button type="button" class="btn btn-success" onclick='previewForm()'>Preview&savePdf</button>
+		</div>
+</body>
+</html>

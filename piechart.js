@@ -1,11 +1,11 @@
    google.charts.load('current', {'packages':['corechart']});
    google.charts.setOnLoadCallback(drawChart);
    function drawChart() {
-   	var location =Number(document.getElementById('LOCATION').value);
-   	var salary =Number(document.getElementById('SALARY').value);
-   	var tecnicalExp =Number(document.getElementById('TEC-EXP').value);
-   	var projectExp =Number(document.getElementById('PJT-EXP').value);
-   	var workHistory =Number(document.getElementById('WORK').value);
+   	var location =Number(document.getElementById('Location_Score').value);
+   	var salary =Number(document.getElementById('Salary_Score').value);
+   	var tecnicalExp =Number(document.getElementById('TEC_Experience_Score').value);
+   	var projectExp =Number(document.getElementById('PJT_Experience_Score').value);
+   	var workHistory =Number(document.getElementById('Work_History_Score').value);
    	var scored=(location+salary+tecnicalExp+projectExp+workHistory);
    	var lostScore = 10-scored;
    	var data = google.visualization.arrayToDataTable([
