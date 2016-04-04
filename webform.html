@@ -16,34 +16,13 @@
 	<script type="text/javascript" src="piechart.js"></script>
 	<script type="text/javascript" src="preview.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-
-		$("#LOCATION").on('mouseleave', function(e) {
-			$('#LOCATION').popover('destroy');
-		});
-
-		$("#LOCATION").on('mouseover', function(e) {
-			var $e = $(e.target); 
-			if ($e.is('option')) {
-				$('#LOCATION').popover('destroy');
-				$("#LOCATION").popover({
-					trigger: 'manual',
-					placement: 'right',
-					title: $e.attr("data-title")
-				}).popover('show');
-			}
-		});
-	});
 	function preview(element) {
-		$(element).change(function () {
-			if (this.files && this.files[0]) {
+			if (element.files && element.files[0]) {
 				var reader = new FileReader();
 				reader.onload = imageIsLoaded;
-				reader.readAsDataURL(this.files[0]);
+				reader.readAsDataURL(element.files[0]);
 			}
-		});
 	};
-
 	function imageIsLoaded(e) {
 		$("#myImg").attr('src', e.target.result);
 	};
@@ -115,13 +94,13 @@
 				<div class="col-sm-4 alert alert-success" id ="job">
 					<!-- <p name='previewData'></p> -->
 					<label class="checkbox-inline" name=''>
-						<input id='Schedule_Interview' type="checkbox"  onchange='assignValueOuterParent(this)'>Schedule Interview
+						<input id='Schedule_Interview' type="checkbox">Schedule Interview
 					</label>
 				</div>
 				<div class="col-sm-4 alert alert-warning" id ="job">
 					<!-- <p name='previewData'></p> -->
 					<label class="checkbox-inline" name=''>
-						<input id='Present_again_in_30_days' type="checkbox"  onchange='assignValueOuterParent(this)'>Present again in 30 days
+						<input id='Present_again_in_30_days' type="checkbox">Present again in 30 days
 					</label>
 				</div>
 				<div class="col-sm-4 alert alert-danger" id ="job">
@@ -141,14 +120,15 @@
 			<div class="form-group col-sm-2">
 				<input class="form-control text-center" id="score" type="text" disabled value=" /10" text-a>
 			</div>
-			<div class="col-sm-10">
-				<div id="piechart" style="width: 630px; height: 350px;">
+			<div class="col-sm-9">
+				im
+				<div id="piechart" style="width: 540px; height: 300px;">
 				</div>
 			</div>
-			<div class="col-sm-2">
-				<br><br><br>
+			<div class="col-sm-3">
+				<br><br>
 				<div class="form-group">
-					<h3 name='previewData'></h3>
+					<h4 name='previewData'></h4>
 					<select class="form-control" id="Location_Score" name='formData' onchange='assignValue(this)'>
 						<option value='0'> location score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -159,7 +139,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<h3 name='previewData'></h3>
+					<h4 name='previewData'></h4>
 					<select class="form-control" id="Salary_Score" name='formData' onchange='assignValue(this)'>
 						<option value=0>salary score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -170,7 +150,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<h3 name='previewData'></h3>
+					<h4 name='previewData'></h4>
 					<select class="form-control" id="TEC_Experience_Score" name='formData' onchange='assignValue(this)'>
 						<option value=0>tech-exp score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -181,7 +161,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<h3 name='previewData'></h3>
+					<h4 name='previewData'></h4>
 					<select class="form-control" id="PJT_Experience_Score" name='formData' onchange='assignValue(this)'>
 						<option  value=0>project-exp score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -192,7 +172,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<h3 name='previewData'></h3>
+					<h4 name='previewData'></h4>
 					<select class="form-control" id="Work_History_Score" name='formData' onchange='assignValue(this)'>
 						<option  value=0>Work History score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>

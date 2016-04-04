@@ -38,7 +38,6 @@ function previewForm(){
 	else if (concern3=="") {alert("Fill concern3")}
 	else if (comment=="") {alert("Fill comment")}
 	//else if (linkedin=="") {alert("Fill linkedin")}
-	else if (true) {}
 	else{
 	$("[name='previewData']").show();
 		$("[name='formData']").hide();
