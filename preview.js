@@ -1,6 +1,5 @@
 function previewForm(){
 	var name = document.getElementById('Name').value;
-	console.log(name)
 	var mobile = document.getElementById('Mobile').value;
 	var email = document.getElementById('Email').value;
 	var jobTitle = document.getElementById('JobTitle').value;
