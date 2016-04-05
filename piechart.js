@@ -23,7 +23,8 @@
    		backgroundColor:'#f0f0f5',
    		title: 'Score Chart',
    		is3D: true,
-   		pieStartAngle:100	
+   		pieStartAngle:100,
+         colors: ['#e0440e', '#ffff00', '#ffb84d', '#0033cc', '#00802b', '#c653c6']
    	};
 
    	var chart = new google.visualization.PieChart(document.getElementById('piechart'));
