@@ -70,7 +70,7 @@
 		/*$('#linkedin').onchange(function () {
 			
 		});*/
-	});
+});
 	</script>
 	<style type="text/css">
 	[name='previewData']{
@@ -113,30 +113,7 @@
 				<input class="form-control" id="Location" type="text" placeholder="Enter location" name='formData' onchange='assignValue(this)'>
 			</div>
 		</div>
-		<br><br>	
-		<div id='section-2' class='row'>
-			<form role="form">
-				<div class="col-sm-4 alert alert-success" id ="job">
-					<!-- <p name='previewData'></p> -->
-					<label class="checkbox-inline" name=''>
-						<input id='Schedule_Interview' type="checkbox">Schedule Interview
-					</label>
-				</div>
-				<div class="col-sm-4 alert alert-warning" id ="job">
-					<!-- <p name='previewData'></p> -->
-					<label class="checkbox-inline" name=''>
-						<input id='Present_again_in_30_days' type="checkbox">Present again in 30 days
-					</label>
-				</div>
-				<div class="col-sm-4 alert alert-danger" id ="job">
-					<!-- <p name='previewData'></p> -->
-					<label class="checkbox-inline" name=''>
-						<input id='Not_Interested' type="checkbox" >Not Interested
-					</label>
-				</div>
-			</form>
-		</div>
-		<br>
+		<br><br>
 		<div id ='section-3' class='row'>
 			<div class='col-sm-2 col-sm-offset-3'><label for="inputPassword">CANDIDATE SCORE</label></div>
 			<div class="form-group col-sm-1">
@@ -213,7 +190,7 @@
 			</div>
 		</div>
 		<br>
-		<div id='section-4 class='row''>
+		<div id='section-4' class='row'>
 			<div class="form-group col-sm-4">
 				<label for="usr">Positives:</label>
 				<div class='row'>
@@ -266,29 +243,42 @@
 				<textarea class="form-control" rows="11" id="comment" name='formData' onchange='$("#commentText").html(this.value)'></textarea>
 			</div>
 			<div class="col-sm-4">
-					<br><br>
-					<p class='well well-sm' id='resumeHref' name='previewData'></p>
-					<input name='formData' class="form-control" id="resume" placeholder='Resume URL' type="url" onchange="$('#resumeHref').html(this.value)"/>
-					<br>
+				<br><br>
+				<p class='well well-sm' id='resumeHref' name='previewData'></p>
+				<input name='formData' class="form-control" id="resume" placeholder='Resume URL' type="url" onchange="$('#resumeHref').html(this.value)"/>
+				<br>
 				
-					<p class='well well-sm' id='videoHref' name='previewData'></p>
-					<input name='formData' class="form-control" id="video" placeholder='Video URL' type="url" onchange="$('#videoHref').html(this.value)" />
-					<br>
+				<p class='well well-sm' id='videoHref' name='previewData'></p>
+				<input name='formData' class="form-control" id="video" placeholder='Video URL' type="url" onchange="$('#videoHref').html(this.value)" />
+				<br>
 				
-					<p class='well well-sm' id='inHref' name='previewData'></p>
-					<input name='formData' class="form-control" placeholder='Linkedin Profile' id="linkedin" type="url" onchange="$('#inHref').html(this.value);"  />
-					<br>
-				
+				<p class='well well-sm' id='inHref' name='previewData'></p>
+				<input name='formData' class="form-control" placeholder='Linkedin Profile' id="linkedin" type="url" onchange="$('#inHref').html(this.value);"  />
+				<br>
 			</div>
-		</div> 
+			<div id="editor"></div>
+		</div>
+		<br>
+		<div class='row' style="text-align:center">
+			<button type="button" name='formData' class="btn btn-success" onclick='previewForm()'>Preview & savePdf</button>
+		</div>
+		<div style="text-align:center" name='previewData'>
+			<button id='save' type="button" class="btn btn-success">SaveAsPdf</button>
+			<button type="button" class="btn btn-success" id="back" >back</button>
+		</div>
+		<br>
+		<div id='section-2' class='row'>
+			<form role="form">
+				<div class="col-sm-12 alert alert-warning" id ="job" style="text-align:center">
+					<!-- <p name='previewData'></p> -->
+						<button id='Schedule_Interview' class="btn btn-warning" type="button"><a href="mailto: ERIC@GULFSTREAMSP.COM?Subject='SCHEDULE INTERVIEW '+document.getElementById('Name').value" target="_top">Schedule Interview</a></button>
+					<!-- <p name='previewData'></p> -->
+						<button id='Present_again_in_30_days' class="btn btn-warning" type="button"><a href="mailto: ERIC@GULFSTREAMSP.COM?Subject='PRESENT AGAIN IN 30 DAYS '+document.getElementById('Name').value" target="_top">Present again in 30 days</a></button>	
+					<!-- <p name='previewData'></p> -->
+						<button id='Not_Interested' class="btn btn-warning" type="button"><a href="mailto: ERIC@GULFSTREAMSP.COM?Subject='NOT INTERESTED '+document.getElementById('Name').value" target="_top">Not Interested</a></button>
+				</div>
+			</form>
+		</div>
 	</div>
-	<div style="text-align:center">
-		<button type="button" name='formData' class="btn btn-success" onclick='previewForm()'>Preview & savePdf</button>
-	</div>
-	<div style="text-align:center" name='previewData'>
-		<button id='save' type="button" class="btn btn-success">SaveAsPdf</button>
-		<button type="button" class="btn btn-success" id="back" >back</button>
-	</div>
-	<div id="editor"></div>
 </body>
 </html>
