@@ -15,14 +15,14 @@
 	<script type="text/javascript" src="loader.js"></script>
 	<script type="text/javascript" src="piechart.js"></script>
 	<script type="text/javascript" src="preview.js"></script>
-	<script type="text/javascript" src="jspdf.js"></script>
+	<script src="http://mrrio.github.io/jsPDF/dist/jspdf.debug.js"></script>
 	<script type="text/javascript">
 	function preview(element) {
-			if (element.files && element.files[0]) {
-				var reader = new FileReader();
-				reader.onload = imageIsLoaded;
-				reader.readAsDataURL(element.files[0]);
-			}
+		if (element.files && element.files[0]) {
+			var reader = new FileReader();
+			reader.onload = imageIsLoaded;
+			reader.readAsDataURL(element.files[0]);
+		}
 	};
 	function imageIsLoaded(e) {
 		$("#myImg").attr('src', e.target.result);
@@ -35,37 +35,42 @@
 		if (item.id.startsWith("pos")||item.id.startsWith("conc")||item.id.startsWith("comment")) {
 			$(item).parent().children(':first-child').html(val);
 		}else{
-		var text = item.id.toUpperCase()+": "+val;
-		$(item).parent().children(':first-child').html(text);
-	}
+			var text = item.id+": "+val;
+			$(item).parent().children(':first-child').html(text);
+		}
 	};
 	function assignValueOuterParent(item){
 		var val = item.value;
 		if (item.id.startsWith("pos")||item.id.startsWith("conc")||item.id.startsWith("comment")) {
 			$(item).parent().children(':first-child').html(val);
 		}else{
-		var text = item.id.toUpperCase()+": "+val;
-		$(item).parent().parent().children(':first-child').html(text);
-	}
+			var text = item.id+": "+val;
+			$(item).parent().parent().children(':first-child').html(text);
+		}
 	};
-	$('#back').click(function(){
-		$("[name='previewData']").hide();
-		$("[name='formData']").show();
-	});
-	var doc = new jsPDF();
-var specialElementHandlers = {
-    '#editor': function (element, renderer) {
-        return true;
-    }
-};
+	$(document).ready(function(){
+		$('#back').click(function(){
+			$("[name='previewData']").hide();
+			$("[name='formData']").show();
+		});
+		var doc = new jsPDF();
+		var specialElementHandlers = {
+			'#editor': function (element, renderer) {
+				return true;
+			}
+		};
 
-$('#save').click(function () {
-    doc.fromHTML($('#body').html(), 15, 15, {
-        'width': 170,
-            'elementHandlers': specialElementHandlers
-    });
-    doc.save('sample-file.pdf');
-});
+		$('#save').click(function () {
+			doc.fromHTML($('#body').html(), 15, 15, {
+				'width': 170,
+				'elementHandlers': specialElementHandlers
+			});
+			doc.save('sample-file.pdf');
+		});
+		/*$('#linkedin').onchange(function () {
+			
+		});*/
+	});
 	</script>
 	<style type="text/css">
 	[name='previewData']{
@@ -80,6 +85,7 @@ $('#save').click(function () {
 			<div class="col-sm-3 text-center"><h3>CANDIDATE SCORECARD</h3></div>
 			<div class="col-sm-4">
 				<h3 name='previewData'></h3>
+				<br>
 				<br>
 				<input class="form-control" id="Name" type="text" placeholder="Enter name" onchange='assignValue(this)' name='formData'>
 			</div>
@@ -125,14 +131,14 @@ $('#save').click(function () {
 				<div class="col-sm-4 alert alert-danger" id ="job">
 					<!-- <p name='previewData'></p> -->
 					<label class="checkbox-inline" name=''>
-						<input id='Not_Interested' type="checkbox"  onchange='assignValueOuterParent(this)'>Not Interested
+						<input id='Not_Interested' type="checkbox" >Not Interested
 					</label>
 				</div>
 			</form>
 		</div>
 		<br>
 		<div id ='section-3' class='row'>
-			<div class='col-sm-2'><label for="inputPassword">CANDIDATE SCORE</label></div>
+			<div class='col-sm-2 col-sm-offset-3'><label for="inputPassword">CANDIDATE SCORE</label></div>
 			<div class="form-group col-sm-1">
 				<input class="form-control text-center" id="percentage" type="text" disabled value="%">
 			</div>
@@ -144,9 +150,9 @@ $('#save').click(function () {
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<br><br>
+				<br name='formData'><br name='formData'>
 				<div class="form-group">
-					<h4 name='previewData'></h4>
+					<p class='alert alert-info' name='previewData'></p>
 					<select class="form-control" id="Location_Score" name='formData' onchange='assignValue(this)'>
 						<option value='0'> location score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -157,7 +163,7 @@ $('#save').click(function () {
 					</select>
 				</div>
 				<div class="form-group">
-					<h4 name='previewData'></h4>
+					<p class='alert alert-info' name='previewData'></p>
 					<select class="form-control" id="Salary_Score" name='formData' onchange='assignValue(this)'>
 						<option value=0>salary score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -168,7 +174,7 @@ $('#save').click(function () {
 					</select>
 				</div>
 				<div class="form-group">
-					<h4 name='previewData'></h4>
+					<p class='alert alert-info' name='previewData'></p>
 					<select class="form-control" id="TEC_Experience_Score" name='formData' onchange='assignValue(this)'>
 						<option value=0>tech-exp score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -179,7 +185,7 @@ $('#save').click(function () {
 					</select>
 				</div>
 				<div class="form-group">
-					<h4 name='previewData'></h4>
+					<p class='alert alert-info' name='previewData'></p>
 					<select class="form-control" id="PJT_Experience_Score" name='formData' onchange='assignValue(this)'>
 						<option  value=0>project-exp score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -190,7 +196,7 @@ $('#save').click(function () {
 					</select>
 				</div>
 				<div class="form-group">
-					<h4 name='previewData'></h4>
+					<p class='alert alert-info' name='previewData'></p>
 					<select class="form-control" id="Work_History_Score" name='formData' onchange='assignValue(this)'>
 						<option  value=0>Work History score</option>
 						<option data-toggle="tooltip" title="Hooray!">0</option>
@@ -200,9 +206,10 @@ $('#save').click(function () {
 						<option data-toggle="tooltip" title="Hooray!">2</option>
 					</select>
 				</div>
+				<button type="button" class="btn btn-success" onclick='drawChart()'>submitScores</button>
 			</div>
 			<div class='col-sm-1 col-sm-offset-4'>
-				<button type="button" class="btn btn-success" onclick='drawChart()'>submitScores</button>
+				
 			</div>
 		</div>
 		<br>
@@ -259,46 +266,32 @@ $('#save').click(function () {
 				<textarea class="form-control" rows="11" id="comment" name='formData' onchange='$("#commentText").html(this.value)'></textarea>
 			</div>
 			<div class="col-sm-4">
-				<br>
-				<div class="col-sm-7">
-
-					<input type="text" class="form-control" id="resumePath" placeholder="Choose File" disabled="disabled">
-				</div>
-				<div class="col-sm-3">
-
-					<button type="button" class="btn btn-success" onclick='$("#resume").click()'>Resume</button>
-					<input id="resume" type="file" style="display:none;" onchange ="path(this)" />
 					<br><br>
-				</div>
-				<div class="col-sm-7">
-
-					<input type="text" class="form-control" id="videoPath" placeholder="Choose File" disabled="disabled">
-				</div>
-				<div class="col-sm-3">
-
-					<button type="button" class="btn btn-danger" onclick='$("#video").click()'>Video</button>
-					<input id="video" type="file" style="display:none;" onchange ="path(this)" accept="video/*" />
+					<a class='well well-sm' id='resumeHref' name='previewData' href="">Resume</a>
+					<input name='formData' type="text" class="form-control" id="resumePath" placeholder="Choose Resume" onclick='$("#resume").click()'>
+					<input id="resume" type="file" style="display:none;" onchange="$('#resumeHref').val(this.value);$('#resumePath').val(this.value);" accept=".pdf,.doc,.docx"/>
 					<br><br>
-				</div>
-				<div class="col-sm-7">
-
-					<input type="text" class="form-control" id="linkedinPath" placeholder="Enter url" >
-				</div>
-				<div class="col-sm-3">
-
-					<button type="button" class="btn btn-info" onclick='$("#linkedin").click()'>Linkedin</button>
-					<input id="linkedin" type="url" style="display:none;" />
+				
+					<a class='well well-sm' id='videoHref' name='previewData' href="">Video</a>
+					<input name='formData'  type="text" class="form-control" id="videoPath" placeholder="Choose File" onclick='$("#video").click()'>
+					<input id="video" type="file" style="display:none;" onchange="$('#videoHref').val(this.value);$('#videoPath').val(this.value);$('#videoHref').val(this.value);" accept="video/*" />
+					<br><br>
+				
+					<a class='well well-sm' id='inHref' name='previewData' href="">linkedin</a>
+					<input name='formData' type="text" class="form-control" id="linkedinPath" placeholder="Enter url" onclick='$("#linkedin").click()' >
+					<input id="linkedin" type="url" onchange="$('#inHref').val(this.value);$('#linkedinPath').val(this.value);" style="display:none;" />
 					<br>
-				</div>
+				
 			</div>
-		</div>
+		</div> 
 	</div>
 	<div style="text-align:center">
-			<button type="button" name='formData' class="btn btn-success" onclick='previewForm()'>Preview&savePdf</button>
-		</div>
-		<div style="text-align:center" name='previewData'>
-			<button id='save' type="button" class="btn btn-success">SaveAsPdf</button>
-			<button type="button" class="btn btn-success" id="back" >back</button>
-		</div>
+		<button type="button" name='formData' class="btn btn-success" onclick='previewForm()'>Preview & savePdf</button>
+	</div>
+	<div style="text-align:center" name='previewData'>
+		<button id='save' type="button" class="btn btn-success">SaveAsPdf</button>
+		<button type="button" class="btn btn-success" id="back" >back</button>
+	</div>
+	<div id="editor"></div>
 </body>
 </html>
