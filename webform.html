@@ -206,7 +206,7 @@
 						<option data-toggle="tooltip" title="Hooray!">2</option>
 					</select>
 				</div>
-				<button type="button" class="btn btn-success" onclick='drawChart()'>submitScores</button>
+				<button name='formData' type="button" class="btn btn-success" onclick='drawChart()'>submitScores</button>
 			</div>
 			<div class='col-sm-1 col-sm-offset-4'>
 				
@@ -267,19 +267,16 @@
 			</div>
 			<div class="col-sm-4">
 					<br><br>
-					<a class='well well-sm' id='resumeHref' name='previewData' href="">Resume</a>
-					<input name='formData' type="text" class="form-control" id="resumePath" placeholder="Choose Resume" onclick='$("#resume").click()'>
-					<input id="resume" type="file" style="display:none;" onchange="$('#resumeHref').val(this.value);$('#resumePath').val(this.value);" accept=".pdf,.doc,.docx"/>
-					<br><br>
+					<p class='well well-sm' id='resumeHref' name='previewData'></p>
+					<input name='formData' class="form-control" id="resume" placeholder='Resume URL' type="url" onchange="$('#resumeHref').html(this.value)"/>
+					<br>
 				
-					<a class='well well-sm' id='videoHref' name='previewData' href="">Video</a>
-					<input name='formData'  type="text" class="form-control" id="videoPath" placeholder="Choose File" onclick='$("#video").click()'>
-					<input id="video" type="file" style="display:none;" onchange="$('#videoHref').val(this.value);$('#videoPath').val(this.value);$('#videoHref').val(this.value);" accept="video/*" />
-					<br><br>
+					<p class='well well-sm' id='videoHref' name='previewData'></p>
+					<input name='formData' class="form-control" id="video" placeholder='Video URL' type="url" onchange="$('#videoHref').html(this.value)" />
+					<br>
 				
-					<a class='well well-sm' id='inHref' name='previewData' href="">linkedin</a>
-					<input name='formData' type="text" class="form-control" id="linkedinPath" placeholder="Enter url" onclick='$("#linkedin").click()' >
-					<input id="linkedin" type="url" onchange="$('#inHref').val(this.value);$('#linkedinPath').val(this.value);" style="display:none;" />
+					<p class='well well-sm' id='inHref' name='previewData'></p>
+					<input name='formData' class="form-control" placeholder='Linkedin Profile' id="linkedin" type="url" onchange="$('#inHref').html(this.value);"  />
 					<br>
 				
 			</div>
