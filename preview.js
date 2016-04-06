@@ -18,8 +18,11 @@ function previewForm(){
 	var concern3 = document.getElementById('conc3').value;
 	var comment = document.getElementById('comment').value;
 	var linkedin = document.getElementById('linkedin').value;
+	if ($("#myImg").attr('src')=="upload.png"&&$("#myImg").val()=="") {
+		$("#myImg").hide();
+	}
 	if (name=="") {alert("Fill Name")}
-	else if (mobile=="") {alert("Fill Mobile")}
+	/*else if (mobile=="") {alert("Fill Mobile")}
 	else if (email=="") {alert("Fill Email")}
 	else if (jobTitle=="") {alert("Fill JobTitle")}
 	else if (location=="") {alert("Fill Location")}
@@ -36,7 +39,7 @@ function previewForm(){
 	else if (concern2=="") {alert("Fill concern2")}
 	else if (concern3=="") {alert("Fill concern3")}
 	else if (comment=="") {alert("Fill comment")}
-	//else if (linkedin=="") {alert("Fill linkedin")}
+	//else if (linkedin=="") {alert("Fill linkedin")}*/
 	else{
 	$("[name='previewData']").show();
 		$("[name='formData']").hide();

@@ -9,25 +9,28 @@
    	var scored=(location+salary+tecnicalExp+projectExp+workHistory);
    	var lostScore = 10-scored;
    	var data = google.visualization.arrayToDataTable([
-   		['Task', 'Scores obtained'],
-   		['Location',     location],
-   		['Salary',      salary],
-   		['Tecnical Experience',  tecnicalExp],
-   		['Project Experience', projectExp],
-   		['Stable Work-History',    workHistory],
-   		['unscored', lostScore]
+   		['Task', '', { role: "style" }],
+   		['Location',     location, '#d95f02'],
+   		['Salary',      salary, '#ffff00'],
+   		['Tecnical Experience',  tecnicalExp, '#ffb84d'],
+   		['Project Experience', projectExp, '#7570b3'],
+   		['Stable Work-History',    workHistory, '#1b9e77']
    		]);
    	document.getElementById('percentage').value=(scored*10)+"%";
-   	document.getElementById('score').value=scored+"/10"
+   	document.getElementById('score').value=scored+"/10";
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
    	var options = {
    		backgroundColor:'#f0f0f5',
    		title: 'Score Chart',
-   		is3D: true,
-   		pieStartAngle:100,
-         colors: ['#e0440e', '#ffff00', '#ffb84d', '#0033cc', '#00802b', '#c653c6']
    	};
 
-   	var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+   	var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
 
-   	chart.draw(data, options);
+   	chart.draw(view, options);
    }
