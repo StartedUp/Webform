@@ -53,9 +53,12 @@
 		$('#back').click(function(){
 			$("[name='previewData']").hide();
 			$("[name='formData']").show();
+			$('#myImg').show();
 		});
 		$('#save').click(function () {
-			var doc = new jsPDF('p', 'pt', 'a4');
+			$('#back').click();
+			$('#Note').show();
+			/*var doc = new jsPDF('p', 'pt', 'a4');
 			var source = $("#body")[0];
 			var specialElementHandlers = {
 				'#editor': function (element, renderer) {
@@ -75,14 +78,20 @@
 			},
 			function (dispose) {
 				doc.save('sample-file.pdf');
-			},margins);
-		});
+			},margins)*/;
+	});
 	});
 	</script>
 	<style type="text/css">
 	[name='previewData']{
 		display: none;
 	}
+	.footer {
+     background-color: #f5f5f5;
+}
+.text-muted {
+    color: #777;
+}
 	</style>
 </head>
 <body id='body'>
@@ -190,7 +199,7 @@
 						<option data-toggle="tooltip" title="Hooray!">2</option>
 					</select>
 				</div>
-				<button name='formData' type="button" class="btn btn-success" onclick='drawChart()'>submitScores</button>
+				<button name='formData' type="button" class="btn btn-success" onclick='drawChart()'>Submit Scores</button>
 			</div>
 			<div class='col-sm-1 col-sm-offset-4'>
 
@@ -252,26 +261,31 @@
 			<div class="col-sm-4">
 				<br><br>
 				<p class='well well-sm' id='resumeHref' name='previewData'></p>
-				<input name='formData' class="form-control" id="resume" placeholder='Resume URL' type="url" onchange="$('#resumeHref').html(this.value)"/>
+				<input name='formData' class="form-control" id="resume" placeholder='Resume URL' type="url" onchange="$('#resumeHref').html(this.value).val(this.value)"/>
 				<br>
 
 				<p class='well well-sm' id='videoHref' name='previewData'></p>
-				<input name='formData' class="form-control" id="video" placeholder='Video URL' type="url" onchange="$('#videoHref').html(this.value)" />
+				<input name='formData' class="form-control" id="video" placeholder='Video URL' type="url" onchange="$('#videoHref').html(this.value).val(this.value)" />
 				<br>
 
 				<p class='well well-sm' id='inHref' name='previewData'></p>
-				<input name='formData' class="form-control" placeholder='Linkedin Profile Url' id="linkedin" type="url" onchange="$('#inHref').html(this.value);"  />
+				<input name='formData' class="form-control" placeholder='Linkedin Profile Url' id="linkedin" type="url" onchange="$('#inHref').html(this.value).val(this.value);"  />
 				<br>
 			</div>
 			<div id="editor"></div>
 		</div>
 		<br>
 		<div class='row' style="text-align:center">
-			<button type="button" name='formData' class="btn btn-success" onclick='previewForm()'>Preview & savePdf</button>
+			<button type="button" name='formData' class="btn btn-success" onclick='previewForm()'>Preview & SavePdf</button>
+			<br><br>
+			<div class="alert alert-danger" id="Note" style="display:none;">
+				<strong>Note!</strong> Please don't forget to attach the PDF downloaded while sending mail.
+			</div>
 		</div>
 		<div style="text-align:center" name='previewData'>
-			<button id='save' type="button" class="btn btn-success"><a href="//pdfcrowd.com/url_to_pdf/" style="color:white;">Save to PDF</a></button>
+			<button id='save' type="button" class="btn btn-success"><a href="//pdfcrowd.com/url_to_pdf/" style="color:white;" onclick = "$('#back').click()">Save to PDF</a></button>
 			<button type="button" class="btn btn-success" id="back" >back</button>
+			
 		</div>
 		<br>
 		<div id='section-2' class='row'>
@@ -289,5 +303,10 @@
 			</form>
 		</div>
 	</div>
+	<footer class="footer">
+      <div class="container text-right">
+        <p class="text-muted">Form designed by <a href="www.rebutton.co">www.rebutton.co</a></p>
+      </div>
+    </footer>
 </body>
 </html>

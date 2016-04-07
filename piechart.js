@@ -28,6 +28,10 @@
    	var options = {
    		backgroundColor:'#f0f0f5',
    		title: 'Score Chart',
+      legend: { position: 'none' },
+      hAxis: {
+      color: '#7570b3',
+    }
    	};
 
    	var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
