@@ -5,11 +5,11 @@ function previewForm(){
 	var jobTitle = document.getElementById('JobTitle').value;
 	var location = document.getElementById('Location').value;
 	//var mailOption = document.getElementById('Schedule_Interview').value;
-	var locationScore = document.getElementById('Location_Score').value;
-	var salaryScore = document.getElementById('Salary_Score').value;
-	var techExpScore = document.getElementById('TEC_Experience_Score').value;
-	var pjtExpScore = document.getElementById('PJT_Experience_Score').value;
-	var workExpScore = document.getElementById('Work_History_Score').value;
+	var locationScore = document.getElementById('Location').value;
+	var salaryScore = document.getElementById('Salary').value;
+	var techExpScore = document.getElementById('Technical Experience').value;
+	var pjtExpScore = document.getElementById('Project Experience').value;
+	var workExpScore = document.getElementById('Stable Work History').value;
 	var positive1 = document.getElementById('pos1').value;
 	var positive2 = document.getElementById('pos2').value;
 	var positive3 = document.getElementById('pos3').value;
@@ -18,10 +18,10 @@ function previewForm(){
 	var concern3 = document.getElementById('conc3').value;
 	var comment = document.getElementById('comment').value;
 	var linkedin = document.getElementById('linkedin').value;
-	if ($("#myImg").attr('src')=="upload.png"&&$("#myImg").val()=="") {
-		$("#myImg").hide();
-	}
 	if (name=="") {alert("Fill Name")}
+		else {
+			if ($("#myImg").attr('src')=="upload.png"&&$("#myImg").val()=="") {
+				$("#myImg").hide();};
 	/*else if (mobile=="") {alert("Fill Mobile")}
 	else if (email=="") {alert("Fill Email")}
 	else if (jobTitle=="") {alert("Fill JobTitle")}
@@ -39,9 +39,27 @@ function previewForm(){
 	else if (concern2=="") {alert("Fill concern2")}
 	else if (concern3=="") {alert("Fill concern3")}
 	else if (comment=="") {alert("Fill comment")}
-	//else if (linkedin=="") {alert("Fill linkedin")}*/
-	else{
+		//else if (linkedin=="") {alert("Fill linkedin")}*/
+	
 	$("[name='previewData']").show();
-		$("[name='formData']").hide();
-	};
+	$("[name='formData']").hide();
+	if($("#linkedin").val()==""){$("#inHref").hide()};
+				if($("#video").val()==""){$("#videoHref").hide()};
+				if($("#resume").val()==""){$("#resumeHref").hide()}	
+	var storeForm = $('body').html();
+	localStorage.setItem("savedForm", storeForm);
+	$('#load').show();
+	$.ajax({
+		url: 'TempCreate.php',
+		type: 'POST',
+		data: { value: storeForm },
+		success: function(result) {
+			window.open("Temp.html","_self");
+			$('#back').click();
+			$('#load').hide();
+		}
+	});
+	$("[name='previewData']").hide();
+	$("[name='formData']").show();
+}
 }
