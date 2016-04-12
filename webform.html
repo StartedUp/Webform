@@ -48,61 +48,44 @@
 			$(item).parent().parent().children(':first-child').html(text);
 		}
 	};
-	/*$(document).ready(function(){
-		$('#back').click(function(){
-			$("[name='previewData']").hide();
-			$("[name='formData']").show();
-			$('#myImg').show();
-		});
-		$('#save').click(function () {
-			$('#back').click();
-			$('#Note').show();
-			$('#section-2').show();
-			var doc = new jsPDF('p', 'pt', 'a4');
-			var source = $("#body")[0];
-			var specialElementHandlers = {
-				'#editor': function (element, renderer) {
-					return true;
-				}
-			};
-			margins = {
-				top: 5,
-				bottom: 6,
-				left: 5,
-				width: 170
-			};
+function displayEmail(){
+	console.log('displayEmail');
+	if (sessionStorage.getItem("pdfSaved")==true) {
+		$('#section-2').show();
+		sessionStorage.setItem("pdfSaved",false);
+	}
+	else{
+		$('#section-2').hide();
+	}
+};
+</script>
+<style type="text/css">
+[name='previewData']{
+	display: none;
+}
+.footer {
+	background-color: #f5f5f5;
+}
+.text-muted {
+	bottom: 0;
+}
+#footerRebutton{
+	color: #777;
+}
+#footerEric{
+	color: #00802b;
 
-			doc.fromHTML(source, 15, 15,{
-				'width': 500,
-				'elementHandlers': specialElementHandlers
-			},
-			function (dispose) {
-				doc.save('sample-file.pdf');
-			},margins);
-		});
-	});*/
-	</script>
-	<style type="text/css">
-	[name='previewData']{
-		display: none;
-	}
-	.footer {
-		background-color: #f5f5f5;
-	}
-	.text-muted {
-		color: #777;
-		bottom: 0;
-	}
-	</style>
+}
+</style>
 </head>
-<body id='body'>
+<body id='body' onload="displayEmail">
 	<div class="container">
 		<div class='row'><div class="col-sm-12 text-center"><h3>CANDIDATE SCORECARD</h3></div></div>
 		<div class="row" style="height: 110px;" id ="header">
 			<div class="col-sm-3"><img src="logo.jpg"  height="59" width="204"></div>
 			<div class="col-sm-1"><br></div>
 			<div class="col-sm-4">
-				<h3 name='previewData'></h3>
+				<h3 id="previewName" name='previewData'></h3>
 				<br>
 				<input class="form-control" id="Name" type="text" placeholder="Enter name" onchange='assignValue(this)' name='formData'>
 			</div>
@@ -285,12 +268,13 @@
 			<img id='load' src="load.gif" style='display:none;'/>
 		</div>
 		<div style="text-align:center;display:none" id='saveBack'>
-			<button id='save' type="button" class="btn btn-success"><a id='downloadPDF' href="//pdfcrowd.com/url_to_pdf/?width=297mm&height=420mm&hmargin=2mm" style="color:white;" onclick='$("#saveBack").hide()'>Save to PDF</a></button>
-			<button type="button" class="btn btn-success" id="back" >back</button>
+			<button id='save' type="button" class="btn btn-success">Save to PDF</button>
+			<a style="display:none" id='downloadPDF' href="//pdfcrowd.com/url_to_pdf/?width=297mm&height=420mm&hmargin=2mm" style="color:white;" >Save to PDF</a>
+			<button type="button" class="btn btn-success" id="back" onclick="window.open('webform.html','_self');">back</button>
 			
 		</div>
 		<br>
-		<div id='section-2' class='row' name='formData' style="display:none;">
+		<div id='section-2' style ="display:none;" class='row'>
 			<form role="form">
 				<div class="col-sm-12 alert alert-warning" id ="job" style="text-align:center">
 					<!-- <p name='previewData'></p> -->
@@ -310,8 +294,13 @@
 		</div>
 	</div>
 	<footer class="footer" name='formData'>
-		<div class="container text-muted text-right">
+		<div id="footerRebutton" class="container text-muted text-right">
 			Form designed by Rebutton.Co (<a href="http://www.rebutton.co">www.rebutton.co</a>)
+		</div>
+	</footer>
+	<footer class="footer" name='previewData'>
+		<div id="footerEric" class="container text-muted text-center" style="color:#00802b;">
+			Dickerson | Gulfstream Strategic Placements | (949) 257-9643 | <a href="www.mechanicalrecruiters.com">www.mechanicalrecruiters.com</a> | <a href="eric@gulfstreamsp.com">eric@gulfstreamsp.com</a>
 		</div>
 	</footer>
 </body>

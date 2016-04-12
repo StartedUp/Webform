@@ -63,16 +63,17 @@
 }
 	</style>
 </head>
-<body id="tempBody">
+<body id="tempBody" onscroll='$("#saveBack").show();'>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#saveBack').show();
-		$('#submit').click();
 		$('#save').click(function(){
+			var pdfName=$("#previewName").html().substring(5);
+			var url ="//pdfcrowd.com/url_to_pdf/?width=297mm&height=420mm&hmargin=2mm&pdf_name="+pdfName;
+			window.open(url);
 			localStorage.setItem("Location",0);localStorage.setItem("Salary",0);localStorage.setItem("Technical Experience",0);
-			localStorage.setItem("Project Experience",0);localStorage.setItem("Stable Work History",0);
-			$('#back').click();
+			localStorage.setItem("Project Experience",0);localStorage.setItem("Stable Work History",0);sessionStorage.setItem("pdfSaved",true);
 			alert("Note! Please do not forget to attach the PDF downloaded while sending mail.");
+			$('#back').click();
 		});
 	});
 </script>

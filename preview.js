@@ -18,6 +18,7 @@ function previewForm(){
 	var concern3 = document.getElementById('conc3').value;
 	var comment = document.getElementById('comment').value;
 	var linkedin = document.getElementById('linkedin').value;
+	sessionStorage.setItem("pdfSaved",false);
 	if (name=="") {alert("Fill Name")}
 		else {
 			if ($("#myImg").attr('src')=="upload.png"&&$("#myImg").val()=="") {
@@ -55,7 +56,6 @@ function previewForm(){
 		data: { value: storeForm },
 		success: function(result) {
 			window.open("Temp.html","_self");
-			$('#back').click();
 			$('#load').hide();
 		}
 	});
