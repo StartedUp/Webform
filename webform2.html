@@ -3,6 +3,8 @@
 <head>
 	<title>CandidateForm</title>
 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
@@ -16,29 +18,33 @@
 	<div class="container">
 		<!-- <div class="row" style="height:40px"></div> -->
 		<div class="row" style="margin-top:20px;">
-			<div class="col-md-3 text-center" style="height:69px" id="logo">
-				<img src="logo.jpg"  height="59" width="204">
-			</div>
-			<div class="col-md-9 text-center" id="title">
-				<h1 style="color:#28A251;"><strong>Candidate Scorecard</strong></h1>
-			</div>			
+			<div class="col-md-12" style="height:69px" id="logo">
+				<img src="logo.jpg"  height="59" width="204" >
+				<h1 style="color:#28A251;display: inline; float:right"><strong>Candidate Scorecard</strong></h1>
+			</div>		
 		</div>
 		<div class="row"><hr></div>
 		<div class="row">
-			<div class="col-md-6" style="height:130px" id="">
-				<input type="image" id="myImg" src="upload.png" class="img-rounded" alt="upload" width="100" height="100">
+			<div class="col-md-12" style="height:130px;" id="">
+				<div style='float:left'>
+				<input type="image" id="myImg" src="upload.png" class="img-rounded" alt="upload" width="120" height="120">
 			</div>
-			<div class="col-md-6 text-right" style="height:130px" id="">
-				<div class="row"><h2 style="height:30px">Candidate Name</h2></div>
-				<div class="row" style="height:20px"><h3><small>Mobile</small></h3></div>
-				<div class="row" style="height:20px"><h5><a href="email">emai</a></h2></div>
-				<div class="row" style="height:20px"><h3><small>City,st</small></h3></div>
-				<div class="row" style="height:20px"><h2>Position Title: Location</h2></div>
+			<div class="text-right" style="height:130px;" id="">
+				<h2  style="margin-bottom: 0;margin-top: 0;">Candidate Name</h2>
+				<h3  style="margin-bottom: 0;margin-top: 0;"><small>Mobile</small></h3>
+				<h5  style="margin-bottom: 0;margin-top: 0;"><a href="email">emai</a></h2>
+				<h3  style="margin-bottom: 0;margin-top: 0;"><small>City,st</small></h3>
+				<h2  style="margin-bottom: 0;margin-top: 0;">Position Title: Location</h2>
 			</div>
+			</div>
+			
 		</div>
 		<div class="row"><hr></div>
 		<div class="row" >
-			<div class="" style="height:69px" id="">
+			<div class="col-md-12" style="overflow:auto;height:100px" id="">
+				<h2  style="margin-bottom: 0;margin-top: 0;display: inline;">Candidate Bio: “</h2>
+				<h4 style="display: inline;color:#737373"><strong>Candidate description, an area where we can
+					write a paragraph or two.</strong></h4><h2 style="display: inline;">”</h2>
 			</div>
 		</div>
 		<div class="row"><hr></div>
