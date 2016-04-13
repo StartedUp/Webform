@@ -18,7 +18,7 @@ function previewForm(){
 	var concern3 = document.getElementById('conc3').value;
 	var comment = document.getElementById('comment').value;
 	var linkedin = document.getElementById('linkedin').value;
-	sessionStorage.setItem("pdfSaved",false);
+	sessionStorage.setItem("isSessionOn","true");
 	if (name=="") {alert("Fill Name")}
 		else {
 			if ($("#myImg").attr('src')=="upload.png"&&$("#myImg").val()=="") {

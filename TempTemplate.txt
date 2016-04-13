@@ -67,7 +67,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#save').click(function(){
-			var pdfName=$("#previewName").html().substring(5);
+			var pdfName=sessionStorage.getItem('Name');
 			var url ="//pdfcrowd.com/url_to_pdf/?width=297mm&height=420mm&hmargin=2mm&pdf_name="+pdfName;
 			window.open(url);
 			localStorage.setItem("Location",0);localStorage.setItem("Salary",0);localStorage.setItem("Technical Experience",0);
