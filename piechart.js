@@ -14,6 +14,8 @@
      ]);
     document.getElementById('percentage').value=(scored*10)+"%";
     document.getElementById('score').value=scored+"/10";
+     document.getElementById('percentage').innerHTML=(scored*10)+"% ";
+    document.getElementById('score').innerHTML=scored+"/10 ";
     var view = new google.visualization.DataView(data);
     view.setColumns([0, 1,
      { calc: "stringify",

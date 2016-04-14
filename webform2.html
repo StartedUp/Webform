@@ -13,8 +13,42 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="preview2.js"></script>
+	<script type="text/javascript" src="loader.js"></script>
+	<script type="text/javascript" src="piechart.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#save').click(function(){
+			$("#saveBack").hide();
+			var storeForm = $('body').html();
+			$('#load').show();
+			$.ajax({
+				url: 'TempTemplate.php',
+				type: 'POST',
+				data: { value: storeForm },
+				success: function(result) {
+					window.open("Temp2.html","_self");
+					$('#load').hide();
+				}
+			});			
+		});
+		for(var id in window.sessionStorage){
+			if (id!=myImg) {
+				var val = sessionStorage.getItem(id);
+				var idJquery = "#"+id;
+				if (id=="resume"||id=="linkedin"||id=="video"||id=="Email") {$(idJquery).attr('href',val);if (id=="Email") {$(idJquery).html(val)};}
+					else{
+						$(idJquery).val(val).html(val);
+					}
+				};
+			};
+			$("#myImg").attr('src', sessionStorage.getItem('myImg'));
+			setTimeout(drawChart, 700);
+		});
+</script>
 </head>
-<body>
+<body onscroll='$("#saveBack").show();'>
 	<div class="container">
 		<!-- <div class="row" style="height:40px"></div> -->
 		<div class="row" style="margin-top:20px;">
@@ -27,34 +61,88 @@
 		<div class="row">
 			<div class="col-md-12" style="height:130px;" id="">
 				<div style='float:left'>
-				<input type="image" id="myImg" src="upload.png" class="img-rounded" alt="upload" width="120" height="120">
+					<input type="image" id="myImg" src="upload.png" class="img-rounded" alt="upload" width="120" height="120">
+				</div>
+				<div class="text-right" style="height:130px;">
+					<h2 id="Name" style="margin-bottom: 0;margin-top: 0;"></h2>
+					<h4 id="Mobile" style="color:#737373;font-style: italic;margin-bottom: 0;margin-top: 0;"><small></small></h3>
+					<h5 style="margin-bottom: 0;margin-top: 0;font-style: italic"><a href="" id="Email"></a></h5>
+					<h4 id="Loc" style="margin-bottom: 0;margin-top: 0;color:#737373;font-style: italic"><small></small></h3>
+					<h2 id="JobTitle" style="margin-bottom: 0;margin-top: 0;"></h2>
+				</div>
 			</div>
-			<div class="text-right" style="height:130px;" id="">
-				<h2  style="margin-bottom: 0;margin-top: 0;">Candidate Name</h2>
-				<h3  style="margin-bottom: 0;margin-top: 0;"><small>Mobile</small></h3>
-				<h5  style="margin-bottom: 0;margin-top: 0;"><a href="email">emai</a></h2>
-				<h3  style="margin-bottom: 0;margin-top: 0;"><small>City,st</small></h3>
-				<h2  style="margin-bottom: 0;margin-top: 0;">Position Title: Location</h2>
-			</div>
-			</div>
-			
 		</div>
 		<div class="row"><hr></div>
 		<div class="row" >
 			<div class="col-md-12" style="overflow:auto;height:100px" id="">
 				<h2  style="margin-bottom: 0;margin-top: 0;display: inline;">Candidate Bio: “</h2>
-				<h4 style="display: inline;color:#737373"><strong>Candidate description, an area where we can
-					write a paragraph or two.</strong></h4><h2 style="display: inline;">”</h2>
+				<h4 style="display: inline;color:#737373"><strong id="comment"></strong>
+				</h4>
+				<h2 style="display: inline;">”</h2>
 			</div>
 		</div>
 		<div class="row"><hr></div>
 		<div class="row">
-			<div class="" style="height:69px" id="">
+			<div class="col-md-12">
+				<h3 style="color:#28A251;margin-top:0"><strong>POSITIVES</strong></h3>
+				<h4 style="display:inline;"><strong>1) </strong></h4><h4 style="color:#737373;font-style: italic;display:inline;" id="pos1"></h4>
+				<br><br>
+				<h4 style="display:inline;"><strong>2) </strong></h4><h4 style="color:#737373;font-style: italic;display:inline;"id="pos2"></h4>
+				<br><br>
+				<h4 style="display:inline;"><strong>3) </strong></h4><h4 style="color:#737373;font-style: italic;display:inline;" id="pos3"></h4>
 			</div>
 		</div>
 		<div class="row"><hr></div>
 		<div class="row">
+			<div class="col-md-12">
+				<h3 style="color:#28A251;margin-top:0"><strong>CONCERNS</strong></h3>
+				<h4 style="display:inline;"><strong>1) </strong></h4><h4 style="color:#737373;font-style: italic;display:inline;" id="conc1"></h4>
+				<br><br>
+				<h4 style="display:inline;"><strong>2) </strong></h4><h4 style="color:#737373;font-style: italic;display:inline;" id="conc2"></h4>
+				<br><br>
+				<h4 style="display:inline;"><strong>3) </strong></h4><h4 style="color:#737373;font-style: italic;display:inline;" id="conc3"></h4>
+			</div>
+		</div>
+		<div class="row" id="urlRow">
+			<div class="col-md-12  text-center">
+				<h3 style='color:#4d4dff;display:inline'><a href="" id="linkedin">Linkedin </a></h3><h3 style='color:#4d4dff;display:inline'><strong>-</strong></h3>
+				<h3 style='color:#4d4dff;display:inline'> <a href="" id="resume"> Resume </a></h3><h3 style='color:#4d4dff;display:inline'><strong>-</strong></h3>
+				<h3 style='color:#4d4dff;display:inline'><a href="" id="video"> Video</a></h3>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="piechart" style="width: 540px; height: 300px; float:left"></div>
+				<div class="text-right" style="height:300px;">
+					<h2 style="display:inline;color:#28A251;"><strong id="percentage"></strong></h2><h2 style="display:inline;color:#28A251;"><strong id="score"></strong></h2><h2 style="display:inline;color:#28A251;"><strong> out of 10</strong></h2><br><br>
+					<h3 style="display:inline">Location: </h3><h3 id="Location" style="display:inline"></h3>
+					<br><br>
+					<h3 style="display:inline">Salary: </h3><h3 id="Salary" style="display:inline"></h3>
+					<br><br>
+					<h3 style="display:inline">Techie: </h3><h3 id="Technical Experience" style="display:inline"></h3>
+					<br><br>
+					<h3 style="display:inline">Projects: </h3><h3 id="Project Experience
+					" style="display:inline"></h3>
+					<br><br>
+					<h3 style="margin-bottom: 0;display:inline">Stable Work History: </h3><h3 id="Stable Work History" style="display:inline"></h3>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class='row text-center'>
+			<div style="display:none;" id='saveBack'>
+				<button id='save' type="button" class="btn btn-success" onclick="">Save to PDF</button>
+				<button type="button" class="btn btn-success" id="back" onclick="window.open('webform.html','_self');">back</button>
+				<img id='load' src="load.gif" style='display:none;'/>
+			</div>
 		</div>
 	</div>
+	<br>
+	<footer class="footer" name='previewData'>
+		<div id="footerEric" class="container text-muted text-center" style="color:#00802b;">
+			Dickerson | Gulfstream Strategic Placements | (949) 257-9643 | <a href="www.mechanicalrecruiters.com">www.mechanicalrecruiters.com</a> | <a href="eric@gulfstreamsp.com">eric@gulfstreamsp.com</a>
+		</div>
+	</footer>
 </body>
 </html>

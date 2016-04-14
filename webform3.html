@@ -11,7 +11,7 @@
 
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="preview2.js"></script>
+	<script type="text/javascript" src="preview.js"></script>
 	<script type="text/javascript" src="loader.js"></script>
 	<script type="text/javascript" src="piechart.js"></script>
 	<script type="text/javascript">
@@ -30,8 +30,11 @@
 	function assignValue(item,here){
 		var val = item.value;
 		sessionStorage.setItem(item.id, val);
+		if (item.id=="resume"||item.id=="linkedin"||item.id=="video") {$('#'+here).attr('href',val).html(item.id+' url')}
+				else{
 		$('#'+here).html(val);
 		$('#'+here).val(val);
+	}
 	};
 	$(document).ready(function(){
 		if (sessionStorage.getItem('isSessionOn')=="true") {
@@ -43,7 +46,7 @@
 			$('#conc3').val(sessionStorage.getItem('conc3'));$('#comment').val(sessionStorage.getItem('comment'));$('#resume').val(sessionStorage.getItem('resume'));$('#video').val(sessionStorage.getItem('video'));$('#linkedin').val(sessionStorage.getItem('linkedin'));
 			$("#myImg").attr('src', sessionStorage.getItem('myImg'));
 			if (sessionStorage.getItem("pdfSaved")) {
-				$('#section-2').hide();
+				$('#section-2').show();
 				window.scrollTo(0, 50000);
 				sessionStorage.setItem("pdfSaved","false");
 			};
@@ -259,7 +262,7 @@
 		</div>
 		<br>
 		<div class='row' style="text-align:center">
-			<button type="button" name='formData' class="btn btn-success" onclick='preview2Form()'>Preview & Save PDF</button>
+			<button type="button" name='formData' class="btn btn-success" onclick='previewForm()'>Preview & Save PDF</button>
 			<br><br>
 			<img id='load' src="load.gif" style='display:none;'/>
 		</div>
