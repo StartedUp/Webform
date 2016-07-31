@@ -28,16 +28,21 @@
 				type: 'POST',
 				data: { value: storeForm },
 				success: function(result) {
-					window.open("Temp2.html","_self");
 					$('#load').hide();
+					window.open("Temp2.html","_self");
 				}
 			});			
 		});
 		for(var id in window.sessionStorage){
-			if (id!=myImg) {
+			if (id!="myImg") {
+				console.log(id);
 				var val = sessionStorage.getItem(id);
 				var idJquery = "#"+id;
-				if (id=="resume"||id=="linkedin"||id=="video"||id=="Email") {$(idJquery).attr('href',val);if (id=="Email") {$(idJquery).html(val)};}
+				if (id=="resume"||id=="linkedin"||id=="video") {$(idJquery).attr('href',val);}
+				else if (id=="Technical Experience"||id=="Project Experience"||id=="Stable Work History") {
+					document.getElementById(id).value=val;
+					document.getElementById(id).innerHTML=val;
+				}
 					else{
 						$(idJquery).val(val).html(val);
 					}
@@ -66,7 +71,7 @@
 				<div class="text-right" style="height:130px;">
 					<h2 id="Name" style="margin-bottom: 0;margin-top: 0;"></h2>
 					<h4 id="Mobile" style="color:#737373;font-style: italic;margin-bottom: 0;margin-top: 0;"><small></small></h3>
-					<h5 style="margin-bottom: 0;margin-top: 0;font-style: italic"><a href="" id="Email"></a></h5>
+					<h5 style="margin-bottom: 0;margin-top: 0;font-style: italic"><a id="Email" onclick="javascript:window.location='mailto: '+sessionStorage.getItem('Email')"></a></h5>
 					<h4 id="Loc" style="margin-bottom: 0;margin-top: 0;color:#737373;font-style: italic"><small></small></h3>
 					<h2 id="JobTitle" style="margin-bottom: 0;margin-top: 0;"></h2>
 				</div>
@@ -74,7 +79,7 @@
 		</div>
 		<div class="row"><hr></div>
 		<div class="row" >
-			<div class="col-md-12" style="overflow:auto;height:100px" id="">
+			<div class="col-md-12" style="overflow:auto;height:200px" id="">
 				<h2  style="margin-bottom: 0;margin-top: 0;display: inline;">Candidate Bio: “</h2>
 				<h4 style="display: inline;color:#737373"><strong id="comment"></strong>
 				</h4>
@@ -105,9 +110,9 @@
 		</div>
 		<div class="row" id="urlRow">
 			<div class="col-md-12  text-center">
-				<h3 style='color:#4d4dff;display:inline'><a href="" id="linkedin">Linkedin </a></h3><h3 style='color:#4d4dff;display:inline'><strong>-</strong></h3>
-				<h3 style='color:#4d4dff;display:inline'> <a href="" id="resume"> Resume </a></h3><h3 style='color:#4d4dff;display:inline'><strong>-</strong></h3>
-				<h3 style='color:#4d4dff;display:inline'><a href="" id="video"> Video</a></h3>
+				<h3 style='color:#4d4dff;display:inline'><a href="" id="linkedin"><img width=100px src="linkedin_circle.png"> </a></h3><h3 style='color:#4d4dff;display:inline'><strong> </strong></h3>
+				<h3 style='color:#4d4dff;display:inline'> <a href="" id="resume"> <img width=90px src="resume_circle.png"> </a></h3><h3 style='color:#4d4dff;display:inline'><strong> </strong></h3>
+				<h3 style='color:#4d4dff;display:inline'><a href="" id="video"> <img width=90px src="video_circle.png"></a></h3>
 			</div>
 		</div>
 		<br>
@@ -120,10 +125,9 @@
 					<br><br>
 					<h3 style="display:inline">Salary: </h3><h3 id="Salary" style="display:inline"></h3>
 					<br><br>
-					<h3 style="display:inline">Techie: </h3><h3 id="Technical Experience" style="display:inline"></h3>
+					<h3 style="display:inline">Technology: </h3><h3 id="Technical Experience" style="display:inline"></h3>
 					<br><br>
-					<h3 style="display:inline">Projects: </h3><h3 id="Project Experience
-					" style="display:inline"></h3>
+					<h3 style="display:inline">Projects: </h3><h3 id="Project Experience" style="display:inline"></h3>
 					<br><br>
 					<h3 style="margin-bottom: 0;display:inline">Stable Work History: </h3><h3 id="Stable Work History" style="display:inline"></h3>
 				</div>
@@ -141,7 +145,7 @@
 	<br>
 	<footer class="footer" name='previewData'>
 		<div id="footerEric" class="container text-muted text-center" style="color:#00802b;">
-			Dickerson | Gulfstream Strategic Placements | (949) 257-9643 | <a href="www.mechanicalrecruiters.com">www.mechanicalrecruiters.com</a> | <a href="eric@gulfstreamsp.com">eric@gulfstreamsp.com</a>
+			Eric Dickerson | Gulfstream Strategic Placements | <span>(949) </span><span>257-9643</span> | <a href="http://www.mechanicalrecruiters.com">www.mechanicalrecruiters.com</a> | <a id="Email" onclick="javascript:window.location='mailto: eric@gulfstreamsp.com'">eric@gulfstreamsp.com</a>
 		</div>
 	</footer>
 </body>

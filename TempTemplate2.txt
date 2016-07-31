@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CandidateForm</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="preview2.js"></script>
+	<script type="text/javascript" src="loader.js"></script>
+	<script type="text/javascript" src="piechart.js"></script>
+	<script type="text/javascript">
+		function downloadPdf () {
+			var pdfName=sessionStorage.getItem('Name');
+			//alert("Note! Please do not forget to attach the PDF downloaded while sending mail.");
+			window.open("test/merge.php?fileName="+pdfName);
+		//$('#back').click();
+		}
+	</script>
+</head>
+<body>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	var pdfName=sessionStorage.getItem('Name');
+		var url ="//pdfcrowd.com/url_to_pdf/?width=297mm&height=-1&hmargin=2mm&pdf_name="+pdfName;
+		window.open(url,"_self");
+		sessionStorage.setItem("pdfSaved",true);
+		setTimeout(downloadPdf, 6000);
+	});
+	</script>
