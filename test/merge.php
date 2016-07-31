@@ -31,6 +31,9 @@ if ($_FILES['file']) {
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <title>Merge Multiple PDF Files Using PHP and pdftk</title> 
 <style type="text/css"> 
 <!-- 
@@ -61,16 +64,16 @@ function backPage (argument) {
   <br /> 
   Upload your PDF files below: <br /> 
   <br /> 
-  <input name="file[]" type="file" id="file[]" /> 
+  <input class="btn btn-success" name="file[]" type="file" id="file[]" /> 
   <br /> 
-  <input name="file[]" type="file" id="file[]" /> 
+  <input class="btn btn-success" name="file[]" type="file" id="file[]" /> 
   <br /> 
-  <input name="file[]" type="file" id="file[]" /> 
+  <input class="btn btn-success" name="file[]" type="file" id="file[]" /> 
   <br /> 
-  <input name="file[]" type="file" id="file[]" /> 
+  <input class="btn btn-success" name="file[]" type="file" id="file[]" /> 
   <br /> 
   <br /> 
-  <input type="submit" name="Submit" value="Merge!" onclick="back()"/> 
+  <input class="btn btn-success" type="button" name="Submit" value="Merge!" onclick="back()"/> 
   <br /> 
   <br /> 
   <a href="http://www.johnboy.com/about-us/news/merge-multiple-pdf-files-with-php">Back to article  
