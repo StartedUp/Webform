@@ -20,7 +20,7 @@
 		function downloadPdf () {
 			var pdfName=sessionStorage.getItem('Name');
 			//alert("Note! Please do not forget to attach the PDF downloaded while sending mail.");
-			window.open("test/merge.php?fileName="+pdfName);
+			window.open("test/merge.php?fileName="+pdfName,'_self');
 		//$('#back').click();
 		}
 	</script>
@@ -29,7 +29,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 	var pdfName=sessionStorage.getItem('Name');
-		var url ="//pdfcrowd.com/url_to_pdf/?width=297mm&height=-1&hmargin=2mm&pdf_name="+pdfName;
+		var url ="//pdfcrowd.com/url_to_pdf/?width=8.5in&height=11in&pdf_name="+pdfName;
 		window.open(url,"_self");
 		sessionStorage.setItem("pdfSaved",true);
 		setTimeout(downloadPdf, 6000);
